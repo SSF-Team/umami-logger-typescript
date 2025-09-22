@@ -9,6 +9,9 @@ const Umami = {
     },
     trackPageView(overrideUrl?: string): void {
         UmamiLogger.getInstance().trackPageView(overrideUrl);
+    },
+    trackIdentify(identifyData: { [key: string]: any }): void {
+        UmamiLogger.getInstance().trackIdentify(identifyData);
     }
 };
 

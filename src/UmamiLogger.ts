@@ -63,6 +63,30 @@ class UmamiLogger {
     }
 
     /**
+     * Track a page view.
+     *
+     * @param overrideUrl - Optional URL to override the default
+     */
+    async trackIdentify(eventData: EventData = {}): Promise<void> {
+        if (!this.config) return;
+
+        // Create payload with event name and data
+        const payload = {
+            hostname: this.config?.hostName || window.location.hostname,
+            language: navigator.language,
+            referrer: document.referrer || '',
+            screen: `${window.screen.width}x${window.screen.height}`,
+            title: document.title,
+            url: window.location.pathname,
+            website: this.config.websiteId,
+            data: eventData,
+        };
+
+        // Send the data
+        this.sendData({ payload: payload, type: 'identify' });
+    }
+
+    /**
      * Log a custom event.
      *
      * @param eventName - Name of the event
